@@ -1,4 +1,4 @@
-package org.wecancodeit.librarydemo;
+package org.wecancodeit.librarydemo.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,6 +34,22 @@ public class Book {
         return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public Campus getCampus(){
+        return campus;
+    }
+
+    public Collection<Author> getAuthors() {
+        return authors;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,4 +62,5 @@ public class Book {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

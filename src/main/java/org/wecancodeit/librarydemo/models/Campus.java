@@ -1,4 +1,4 @@
-package org.wecancodeit.librarydemo;
+package org.wecancodeit.librarydemo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,13 +24,16 @@ public class Campus {
 
     }
 
-    public Campus(String location, Book ...books){
+    public Campus(String location){
         this.location = location;
-        this.books = new ArrayList<>(Arrays.asList(books));
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getLocation(){
+        return location;
     }
 
     public Collection<Book> getBooks() {
