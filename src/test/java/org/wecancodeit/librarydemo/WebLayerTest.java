@@ -7,10 +7,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.wecancodeit.librarydemo.models.Author;
+import org.wecancodeit.librarydemo.models.Book;
 import org.wecancodeit.librarydemo.models.Campus;
 import org.wecancodeit.librarydemo.repositories.AuthorRepository;
 import org.wecancodeit.librarydemo.repositories.BookRepository;
 import org.wecancodeit.librarydemo.repositories.CampusRepository;
+
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -68,6 +72,18 @@ public class WebLayerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("campusView"))
                 .andExpect(model().attributeExists("campus"));
+    }
+
+    @Test
+    public void shouldBeOkForASingleBookEndpointWithBookViewAndBookModelAttribute() throws Exception{
+        Campus testCampus = new Campus("Columbus");
+        Author testAuthor = new Author("first", "Last");
+        Book testBook = new Book("Title", "description", testCampus, testAuthor);
+        when(bookRepo.findById(1L)).thenReturn(Optional.of(testBook));
+        mockMvc.perform(get("/books/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("bookView"))
+                .andExpect(model().attributeExists("book"));
     }
 
 }
